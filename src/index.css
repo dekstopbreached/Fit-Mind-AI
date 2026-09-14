@@ -1,0 +1,348 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap');
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Poppins", "Inter var", ui-sans-serif, system-ui, -apple-system,
+    Segoe UI, Roboto, sans-serif;
+
+  --color-ink-50: #f8fafc;
+  --color-ink-100: #f1f5f9;
+  --color-ink-200: #e2e8f0;
+  --color-ink-300: #cbd5e1;
+  --color-ink-400: #94a3b8;
+  --color-ink-500: #64748b;
+  --color-ink-600: #475569;
+  --color-ink-700: #334155;
+  --color-ink-800: #1e293b;
+  --color-ink-900: #0f172a;
+
+  --color-brand-50: #fffbea;
+  --color-brand-100: #fff6d3;
+  --color-brand-200: #ffecb5;
+  --color-brand-300: #ffe082;
+  --color-brand-400: #ffc948;
+  --color-brand-500: #ffc107;
+  --color-brand-600: #ffb300;
+  --color-brand-700: #ffa000;
+  --color-brand-800: #ff8f00;
+  --color-brand-900: #ff6f00;
+}
+
+/* ---------- Theme tokens (Permanent Dark Mode SaaS Theme) ---------- */
+:root {
+  color-scheme: dark;
+
+  --bg-base: #000000;
+  --bg-aurora-1: rgba(255, 193, 7, 0.15);
+  --bg-aurora-2: rgba(255, 152, 0, 0.12);
+  --bg-aurora-3: rgba(255, 193, 7, 0.08);
+
+  --text: #f8fafc;
+  --text-soft: #cbd5e1;
+  --text-muted: #94a3b8;
+  --text-faint: #64748b;
+
+  --surface: rgba(15, 23, 42, 0.75);
+  --surface-strong: rgba(30, 41, 59, 0.95);
+  --surface-hover: rgba(30, 41, 59, 0.8);
+  --surface-border: rgba(255, 255, 255, 0.12);
+  --surface-ring: rgba(255, 255, 255, 0.15);
+
+  --input-bg: rgba(15, 23, 42, 0.7);
+  --input-border: rgba(255, 255, 255, 0.15);
+  --input-border-focus: #ffc107;
+  --input-ring-focus: rgba(255, 193, 7, 0.25);
+
+  --chip-bg: rgba(255, 255, 255, 0.08);
+  --chip-text: #e2e8f0;
+
+  --divider: rgba(255, 255, 255, 0.12);
+  --shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5);
+
+  --heat-0: rgba(255, 255, 255, 0.05);
+  --heat-1: rgba(255, 193, 7, 0.25);
+  --heat-2: rgba(255, 193, 7, 0.5);
+  --heat-3: rgba(255, 152, 0, 0.75);
+  --heat-4: #ff8f00;
+
+  --chart-grid: rgba(255, 255, 255, 0.08);
+  --chart-tick: #94a3b8;
+  --chart-tooltip-bg: #0f172a;
+  --chart-tooltip-border: rgba(255, 255, 255, 0.15);
+}
+
+/* ---------- Light Mode Theme ---------- */
+:root:not(.dark) {
+  color-scheme: light;
+
+  --bg-base: #ffffff;
+  --bg-aurora-1: rgba(255, 193, 7, 0.08);
+  --bg-aurora-2: rgba(255, 152, 0, 0.06);
+  --bg-aurora-3: rgba(255, 193, 7, 0.05);
+
+  --text: #1e293b;
+  --text-soft: #475569;
+  --text-muted: #64748b;
+  --text-faint: #94a3b8;
+
+  --surface: rgba(241, 245, 249, 0.8);
+  --surface-strong: rgba(226, 232, 240, 0.95);
+  --surface-hover: rgba(226, 232, 240, 0.85);
+  --surface-border: rgba(15, 23, 42, 0.12);
+  --surface-ring: rgba(15, 23, 42, 0.15);
+
+  --input-bg: rgba(241, 245, 249, 0.9);
+  --input-border: rgba(15, 23, 42, 0.15);
+  --input-border-focus: #ffc107;
+  --input-ring-focus: rgba(255, 193, 7, 0.25);
+
+  --chip-bg: rgba(15, 23, 42, 0.08);
+  --chip-text: #1e293b;
+
+  --divider: rgba(15, 23, 42, 0.12);
+  --shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.1);
+
+  --heat-0: rgba(15, 23, 42, 0.05);
+  --heat-1: rgba(255, 193, 7, 0.15);
+  --heat-2: rgba(255, 193, 7, 0.35);
+  --heat-3: rgba(255, 152, 0, 0.6);
+  --heat-4: #ff8f00;
+
+  --chart-grid: rgba(15, 23, 42, 0.08);
+  --chart-tick: #64748b;
+  --chart-tooltip-bg: #f8fafc;
+  --chart-tooltip-border: rgba(15, 23, 42, 0.15);
+}
+
+:root {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  color: var(--text);
+  background: var(--bg-base);
+}
+
+/* Aurora mesh background - Dark Mode */
+html.dark body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 50% at 20% 0%, var(--bg-aurora-1), transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 20%, var(--bg-aurora-2), transparent 60%),
+    radial-gradient(ellipse 60% 60% at 50% 100%, var(--bg-aurora-3), transparent 60%);
+  filter: saturate(1.2);
+}
+
+/* Aurora mesh background - Light Mode */
+html:not(.dark) body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 50% at 20% 0%, var(--bg-aurora-1), transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 20%, var(--bg-aurora-2), transparent 60%),
+    radial-gradient(ellipse 60% 60% at 50% 100%, var(--bg-aurora-3), transparent 60%);
+  filter: saturate(0.8) brightness(1.1);
+}
+
+/* ---------- Utility components ---------- */
+@layer components {
+  .glass {
+    background: var(--surface);
+    border: 1px solid var(--surface-border);
+    backdrop-filter: blur(20px) saturate(140%);
+    -webkit-backdrop-filter: blur(20px) saturate(140%);
+  }
+  .glass-strong {
+    background: var(--surface-strong);
+    border: 1px solid var(--surface-border);
+    backdrop-filter: blur(24px) saturate(160%);
+    -webkit-backdrop-filter: blur(24px) saturate(160%);
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--surface-border);
+    backdrop-filter: blur(20px) saturate(140%);
+    -webkit-backdrop-filter: blur(20px) saturate(140%);
+    border-radius: 1rem;
+    box-shadow: var(--shadow);
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold text-slate-900 transition active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed;
+    background: linear-gradient(135deg, #ffc107, #ff9800);
+    box-shadow: 0 6px 18px rgba(255, 152, 0, 0.4);
+  }
+  .btn-primary:hover:not(:disabled) {
+    filter: brightness(0.95);
+    box-shadow: 0 8px 22px rgba(255, 152, 0, 0.55);
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-medium transition active:scale-[0.98];
+    color: var(--text);
+    background: var(--surface-strong);
+    border: 1px solid var(--surface-border);
+  }
+  .btn-secondary:hover {
+    background: var(--surface-hover);
+    border-color: var(--input-border-focus);
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-3 py-2 text-sm font-medium transition;
+    color: var(--text-soft);
+  }
+  .btn-ghost:hover {
+    background: var(--surface-hover);
+    color: var(--text);
+  }
+
+  .input {
+    @apply w-full rounded-xl px-3.5 py-2.5 text-sm outline-none transition;
+    background: var(--input-bg);
+    border: 1px solid var(--input-border);
+    color: var(--text);
+  }
+  .input::placeholder { color: var(--text-faint); }
+  .input:focus {
+    border-color: var(--input-border-focus);
+    box-shadow: 0 0 0 4px var(--input-ring-focus);
+  }
+
+  .label {
+    @apply block text-sm font-semibold mb-1.5;
+    color: var(--text-soft);
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold;
+    background: var(--chip-bg);
+    color: var(--chip-text);
+  }
+
+  .divider {
+    border-color: var(--divider) !important;
+  }
+
+  .text-soft { color: var(--text-soft); }
+  .text-muted { color: var(--text-muted); }
+  .text-faint { color: var(--text-faint); }
+}
+
+/* ---------- Animations ---------- */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in { animation: fade-in 0.3s ease-out; }
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-slide-up { animation: slide-up 0.35s ease-out; }
+
+@keyframes aurora-shift {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(-2%, 1%, 0) scale(1.03); }
+}
+body::before { animation: aurora-shift 22s ease-in-out infinite; }
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-thumb {
+  background: var(--input-border);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--text-faint); }
+
+/* ---------- Admin Panel — Distinct Amber/Orange Visual Treatment ---------- */
+.admin-sidebar {
+  background: rgba(10, 6, 0, 0.85);
+  border-right: 1px solid rgba(245, 158, 11, 0.25);
+  backdrop-filter: blur(24px) saturate(150%);
+  -webkit-backdrop-filter: blur(24px) saturate(150%);
+}
+
+.admin-sidebar-header {
+  background: rgba(245, 158, 11, 0.05);
+  border-bottom: 1px solid rgba(245, 158, 11, 0.2);
+}
+
+.admin-panel {
+  /* Subtle amber aurora for admin views */
+  background: var(--bg-base);
+}
+
+.admin-panel::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 70% 50% at 15% 0%, rgba(245, 158, 11, 0.12), transparent 60%),
+    radial-gradient(ellipse 50% 40% at 85% 15%, rgba(234, 88, 12, 0.08), transparent 60%),
+    radial-gradient(ellipse 60% 60% at 50% 100%, rgba(245, 158, 11, 0.06), transparent 60%);
+  animation: aurora-shift 25s ease-in-out infinite;
+}
+
+/* ---------- Premium Gate — blurred lock overlay ---------- */
+.premium-gate-wrapper {
+  position: relative;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.premium-gate-blur {
+  filter: blur(6px) brightness(0.7);
+  pointer-events: none;
+  user-select: none;
+}
+
+.premium-gate-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(2px);
+  z-index: 10;
+  border-radius: 1rem;
+  padding: 2rem;
+  text-align: center;
+  gap: 0.75rem;
+}
+
+/* ---------- Subscription tier badges ---------- */
+.tier-badge-free {
+  @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-bold;
+  background: rgba(100, 116, 139, 0.15);
+  color: #94a3b8;
+  border: 1px solid rgba(100, 116, 139, 0.2);
+}
+
+.tier-badge-premium {
+  @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-bold;
+  background: rgba(245, 158, 11, 0.15);
+  color: #f59e0b;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+

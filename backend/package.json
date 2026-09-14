@@ -1,0 +1,32 @@
+{
+  "name": "fitmind-ai-backend",
+  "private": true,
+  "version": "2.1.0",
+  "description": "FitMind AI API - Express + MongoDB backend with manual payment approval",
+  "type": "module",
+  "main": "server.js",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "smoke": "bash scripts/smoke-test.sh",
+    "check": "node --check server.js && for f in config/*.js middleware/*.js models/*.js routes/*.js utils/*.js; do node --check \"$f\" || exit 1; done && echo 'syntax ok'"
+  },
+  "dependencies": {
+    "@google/genai": "^1.8.0",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.4",
+    "jsonwebtoken": "^9.0.1",
+    "mongoose": "^7.5.1",
+    "multer": "^2.4.0",
+    "node-cron": "^4.6.0",
+    "openai": "^4.9.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
