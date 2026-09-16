@@ -20,8 +20,8 @@ export default function Register() {
   const submit = async (e) => {
     e.preventDefault();
     setErr("");
-    if (form.password.length < 6) {
-      setErr("Password must be at least 6 characters");
+    if (form.password.length < 8) {
+      setErr("Password must be at least 8 characters");
       return;
     }
     setLoading(true);
@@ -81,9 +81,10 @@ export default function Register() {
                 type="password"
                 value={form.password}
                 onChange={set("password")}
-                placeholder="At least 6 characters"
+                placeholder="At least 8 characters"
                 required
               />
+              <p className="text-xs text-muted mt-1">Use at least 8 characters.</p>
             </div>
             {err && (
               <div className="text-sm text-rose-500 bg-rose-500/10 border border-rose-500/20 rounded-lg px-3 py-2">
