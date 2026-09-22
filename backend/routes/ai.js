@@ -621,7 +621,9 @@ Provide a helpful, precise, non-medical coaching response.
       content = `I can still help with your current plan. You are following a Version ${workoutPlan?.version || 1} ${profile?.fitnessGoal || "fitness"} program. Try asking about exercise form, recovery, nutrition, or how to progress your next session.`;
     }
 
-    const assistantContent = content || "FitMind AI could not generate a response.";
+    const assistantContent =
+      (typeof content === "string" && content.trim()) ||
+      "FitMind AI could not generate a response.";
     try {
       await Message.create({ userId: req.user._id, role: "assistant", content: assistantContent, provider });
     } catch (e) {}

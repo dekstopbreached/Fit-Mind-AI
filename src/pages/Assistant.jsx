@@ -46,7 +46,14 @@ export default function AssistantPage() {
 
     try {
       const res = await api.post("/ai/chat", { question: userText });
-      const assistantMsg = { role: "assistant", content: res.data.content, _id: res.data.messageId };
+      const assistantMsg = {
+        role: "assistant",
+        content:
+          typeof res.data?.content === "string" && res.data.content.trim()
+            ? res.data.content
+            : "FitMind AI returned an empty response. Please try again.",
+        _id: res.data.messageId,
+      };
       setMessages((prev) => [...prev, assistantMsg]);
     } catch (err) {
       console.error("Chat request error:", err);

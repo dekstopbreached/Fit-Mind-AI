@@ -62,7 +62,13 @@ export default function AIChat() {
       const res = await api.post("/ai/chat", { question: q });
       setMessages((m) => [
         ...m,
-        { role: "assistant", content: res.data.content },
+        {
+          role: "assistant",
+          content:
+            typeof res.data?.content === "string" && res.data.content.trim()
+              ? res.data.content
+              : "FitMind AI returned an empty response. Please try again.",
+        },
       ]);
     } catch {
       setMessages((m) => [
