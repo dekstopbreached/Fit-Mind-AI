@@ -1,4 +1,5 @@
 import express from "express";
+import mongoose from "mongoose";
 import { GoogleGenAI } from "@google/genai";
 import { OpenAI } from "openai";
 import authMiddleware from "../middleware/auth.js";
@@ -141,7 +142,7 @@ router.use(authMiddleware);
  * every "Premium" AI feature was free and the upgrade bought nothing.
  *
  *   free      : first workout/diet generation, plan history, morning motivation
- *   premium   : regeneration, progress analysis, adaptive re-planning, AI chat
+ *   premium   : regeneration, progress analysis, adaptive re-planning
  */
 
 // --- 1. AI WORKOUT GENERATION (first plan free, regeneration is Premium) ---
@@ -588,8 +589,8 @@ Include all 7 days of the week in weeklySchedule.
   }
 });
 
-// --- 5. AI CHAT ASSISTANT (Premium) ---
-router.post("/chat", requirePremium, async (req, res) => {
+// --- 5. AI CHAT ASSISTANT ---
+router.post("/chat", async (req, res) => {
   const { question } = req.body;
   if (!question) return res.status(400).json({ message: "Question is required" });
 
@@ -612,9 +613,20 @@ User Question: ${question}
 Provide a helpful, precise, non-medical coaching response.
 `;
 
-    const content = await generateText(buildPrompt(contextPrompt, req.user));
+    let content;
+    try {
+      content = await generateText(buildPrompt(contextPrompt, req.user));
+    } catch (providerError) {
+      console.error("AI chat provider failed:", providerError);
+      content = `I can still help with your current plan. You are following a Version ${workoutPlan?.version || 1} ${profile?.fitnessGoal || "fitness"} program. Try asking about exercise form, recovery, nutrition, or how to progress your next session.`;
+    }
 
-    res.json({ content: content || "FitMind AI could not generate a response.", messageId: Date.now() });
+    const assistantContent = content || "FitMind AI could not generate a response.";
+    try {
+      await Message.create({ userId: req.user._id, role: "assistant", content: assistantContent, provider });
+    } catch (e) {}
+
+    res.json({ content: assistantContent, messageId: Date.now() });
   } catch (error) {
     console.error("AI chat error:", error);
     res.status(500).json({ message: "AI request failed: " + error.message });

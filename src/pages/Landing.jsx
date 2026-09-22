@@ -59,7 +59,7 @@ export default function Landing() {
               </span>
             </h1>
             <p className="mt-5 text-soft text-lg leading-relaxed max-w-xl mx-auto lg:mx-0">
-              FitMind AI creates personalized workout and nutrition plans, tracks your progress, and continuously evolves your training split ($v_1 \rightarrow v_2 \rightarrow v_n$) as you get stronger.
+              FitMind AI creates personalized workout and nutrition plans, tracks your progress, and continuously evolves your training split as you get stronger.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
               <Link to="/register" className="btn-primary px-6 py-3.5 text-base font-semibold shadow-xl shadow-brand-500/30 flex items-center gap-2">
@@ -110,7 +110,7 @@ export default function Landing() {
             { step: "01", title: "Tell Us About Yourself", desc: "Complete our 2-minute body metrics assessment (age, height, weight, goal, equipment)." },
             { step: "02", title: "Get Your AI Plan", desc: "Our engine computes exact BMR/TDEE targets and builds your Version 1 training split." },
             { step: "03", title: "Track Your Progress", desc: "Log completed workout sessions, body weight trends, and energy levels." },
-            { step: "04", title: "Let AI Adapt Your Plan", desc: "Our Adaptive Engine updates your routine to Version v2 to keep you progressing." },
+            { step: "04", title: "Let AI Adapt Your Plan", desc: "Our Adaptive Engine updates your routine with a fresh version to keep you progressing." },
           ].map((s, idx) => (
             <div key={idx} className="card p-6 relative overflow-hidden flex flex-col justify-between">
               <div>
@@ -133,7 +133,7 @@ export default function Landing() {
           {[
             { icon: Dumbbell, title: "AI Workout Planning", desc: "Structured exercise schedules tailored to your equipment, location, and training experience." },
             { icon: Utensils, title: "AI Nutrition Planning", desc: "Caloric and macronutrient breakdowns with meal suggestions and healthy alternatives." },
-            { icon: Zap, title: "Adaptive Coaching Engine", desc: "Automatic plan versioning ($v_1 \\rightarrow v_2$) based on logged consistency and progress." },
+            { icon: Zap, title: "Adaptive Coaching Engine", desc: "Automatic plan updates based on your logged consistency and progress." },
             { icon: BarChart3, title: "Progress Analytics", desc: "Dynamic weight trend line charts, completion percentages, and consistency tracking." },
             { icon: Brain, title: "AI Fitness Assistant", desc: "24/7 contextual chat assistant answering questions about form, diet, and recovery." },
             { icon: Crown, title: "Reviewed Premium Access", desc: "Pay by QR code and receive premium access after admin approval." },

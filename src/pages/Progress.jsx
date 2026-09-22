@@ -199,7 +199,7 @@ export default function ProgressPage() {
             Continuous AI Plan Adaptation
           </h2>
           <p className="text-sm text-soft mt-1 max-w-2xl leading-relaxed">
-            The core differentiator of FitMind AI: your plans do not stay static. Our AI engine analyzes your consistency, weight trends, and workout performance to evolve your exercises and caloric targets from Version $v_1 \rightarrow v_2 \rightarrow v_n$.
+            The core differentiator of FitMind AI: your plans do not stay static. Our AI engine analyzes your consistency, weight trends, and workout performance to evolve your exercises and caloric targets over time.
           </p>
 
           {errorMsg && (

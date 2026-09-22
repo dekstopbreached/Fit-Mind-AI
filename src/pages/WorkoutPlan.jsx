@@ -18,6 +18,7 @@ export default function WorkoutPlanPage() {
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(true);
   const [regenerating, setRegenerating] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const [selectedDay, setSelectedDay] = useState(0);
   const [completedExercises, setCompletedExercises] = useState({});
 
@@ -46,12 +47,16 @@ export default function WorkoutPlanPage() {
 
   const handleRegenerate = async () => {
     setRegenerating(true);
+    setErrorMessage("");
     try {
-      const res = await api.post("/ai/workout");
-      setPlan(res.data.plan);
-      fetchWorkoutPlan();
+      const res = await api.post("/ai/adapt-plan", {
+        userFeedback: "Create a fresh workout variation with progressive overload and different exercise variations.",
+      });
+      setPlan(res.data.workoutPlan);
+      await fetchWorkoutPlan(res.data.version);
     } catch (err) {
       console.error("Error regenerating workout plan:", err);
+      setErrorMessage(err.response?.data?.message || "Could not regenerate your plan. Please try again.");
     } finally {
       setRegenerating(false);
     }
@@ -138,6 +143,12 @@ export default function WorkoutPlanPage() {
               Regenerate Plan
             </button>
           </div>
+
+          {errorMessage && (
+            <div className="mt-4 rounded-lg border border-rose-500/30 bg-rose-500/10 px-3 py-2 text-sm text-rose-400">
+              {errorMessage}
+            </div>
+          )}
         </div>
       </div>
 

@@ -54,7 +54,7 @@ export default function AssistantPage() {
         ...prev,
         {
           role: "assistant",
-          content: "Sorry, FitMind AI is temporarily unavailable. Please verify your connection or AI key.",
+          content: err.response?.data?.message || "Sorry, FitMind AI is temporarily unavailable. Please verify your connection or AI key.",
           _id: Date.now() + 1,
         },
       ]);

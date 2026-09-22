@@ -240,7 +240,7 @@ export default function Dashboard() {
               </div>
               <h3 className="font-bold text-base mt-1">Unlock Unlimited AI Plan Adaptations</h3>
               <p className="text-xs text-muted mt-1 leading-relaxed">
-                Experience automatic weekly plan versioning ($v_1 \rightarrow v_2$), 24/7 AI chat coach, and admin-reviewed access.
+                Experience automatic weekly plan updates, 24/7 AI chat coaching, and admin-reviewed access.
               </p>
               <Link to="/pricing" className="btn-primary w-full py-2.5 text-xs font-semibold mt-4 justify-center">
                 View payment options
