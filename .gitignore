@@ -9,6 +9,18 @@ lerna-debug.log*
 
 # Environment files
 .env
+.env.*
+!.env.example
+!backend/.env.example
+
+# Private keys and local credentials
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+credentials.json
+service-account*.json
 
 node_modules
 dist
